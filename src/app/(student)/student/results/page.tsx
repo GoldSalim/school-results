@@ -38,59 +38,63 @@ export default async function StudentResultsPage() {
             
             return (
               <Card key={result.id} className="border-slate-200 shadow-sm overflow-hidden">
-                <CardHeader className="bg-slate-50 border-b flex flex-row items-center justify-between">
+                <CardHeader className="bg-slate-50 border-b flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <CardTitle>{result.term.session.name} - {result.term.name}</CardTitle>
                   <a 
                     href={`/api/report-card/${result.id}`} 
                     target="_blank"
-                    className="text-sm bg-[#0A1F44] text-white px-3 py-1.5 rounded hover:bg-opacity-90 transition"
+                    className="text-sm bg-[#0A1F44] text-white px-4 py-2 rounded text-center hover:bg-opacity-90 transition w-full md:w-auto"
                   >
                     Download PDF
                   </a>
                 </CardHeader>
                 <CardContent className="p-0">
-                  <table className="w-full text-sm text-left">
-                    <thead className="bg-white text-slate-500 border-b">
-                      <tr>
-                        <th className="px-6 py-3 font-medium">Subject</th>
-                        <th className="px-6 py-3 font-medium">1st CA</th>
-                        <th className="px-6 py-3 font-medium">2nd CA</th>
-                        <th className="px-6 py-3 font-medium">3rd CA</th>
-                        <th className="px-6 py-3 font-medium">Exam</th>
-                        <th className="px-6 py-3 font-medium">Total</th>
-                        <th className="px-6 py-3 font-medium">Grade</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y">
-                      {result.scores.map((score) => (
-                        <tr key={score.id} className="hover:bg-slate-50">
-                          <td className="px-6 py-3 font-medium">{score.subject.name}</td>
-                          <td className="px-6 py-3">{score.firstCA}</td>
-                          <td className="px-6 py-3">{score.secondCA}</td>
-                          <td className="px-6 py-3">{score.thirdCA}</td>
-                          <td className="px-6 py-3">{score.exam}</td>
-                          <td className="px-6 py-3 font-bold">{score.total}</td>
-                          <td className="px-6 py-3">
-                            <span className={`px-2 py-1 rounded text-xs font-bold ${
-                              score.grade.startsWith('A') ? 'bg-green-100 text-green-700' :
-                              score.grade.startsWith('B') ? 'bg-blue-100 text-blue-700' :
-                              score.grade.startsWith('C') ? 'bg-yellow-100 text-yellow-700' :
-                              score.grade.startsWith('D') || score.grade.startsWith('E') ? 'bg-orange-100 text-orange-700' :
-                              'bg-red-100 text-red-700'
-                            }`}>
-                              {score.grade}
-                            </span>
-                          </td>
+                  
+                  {/* Scrollable table container */}
+                  <div className="overflow-x-auto w-full">
+                    <table className="w-full text-sm text-left whitespace-nowrap min-w-[600px]">
+                      <thead className="bg-white text-slate-500 border-b">
+                        <tr>
+                          <th className="px-6 py-3 font-medium">Subject</th>
+                          <th className="px-6 py-3 font-medium">1st CA</th>
+                          <th className="px-6 py-3 font-medium">2nd CA</th>
+                          <th className="px-6 py-3 font-medium">3rd CA</th>
+                          <th className="px-6 py-3 font-medium">Exam</th>
+                          <th className="px-6 py-3 font-medium">Total</th>
+                          <th className="px-6 py-3 font-medium">Grade</th>
                         </tr>
-                      ))}
-                    </tbody>
-                    <tfoot className="bg-slate-50 border-t font-bold">
-                      <tr>
-                        <td className="px-6 py-3" colSpan={5}>Overall Average</td>
-                        <td className="px-6 py-3" colSpan={2}>{average}%</td>
-                      </tr>
-                    </tfoot>
-                  </table>
+                      </thead>
+                      <tbody className="divide-y">
+                        {result.scores.map((score) => (
+                          <tr key={score.id} className="hover:bg-slate-50">
+                            <td className="px-6 py-3 font-medium">{score.subject.name}</td>
+                            <td className="px-6 py-3">{score.firstCA}</td>
+                            <td className="px-6 py-3">{score.secondCA}</td>
+                            <td className="px-6 py-3">{score.thirdCA}</td>
+                            <td className="px-6 py-3">{score.exam}</td>
+                            <td className="px-6 py-3 font-bold">{score.total}</td>
+                            <td className="px-6 py-3">
+                              <span className={`px-2 py-1 rounded text-xs font-bold ${
+                                score.grade.startsWith('A') ? 'bg-green-100 text-green-700' :
+                                score.grade.startsWith('B') ? 'bg-blue-100 text-blue-700' :
+                                score.grade.startsWith('C') ? 'bg-yellow-100 text-yellow-700' :
+                                score.grade.startsWith('D') || score.grade.startsWith('E') ? 'bg-orange-100 text-orange-700' :
+                                'bg-red-100 text-red-700'
+                              }`}>
+                                {score.grade}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                      <tfoot className="bg-slate-50 border-t font-bold">
+                        <tr>
+                          <td className="px-6 py-3" colSpan={5}>Overall Average</td>
+                          <td className="px-6 py-3" colSpan={2}>{average}%</td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
 
                   <div className="bg-white p-6 border-t space-y-4">
                     <div>

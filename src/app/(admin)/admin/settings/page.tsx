@@ -21,13 +21,13 @@ export default async function SettingsPage() {
 
       <div className="max-w-2xl">
         <Card className="border-slate-200 shadow-sm">
-          <CardHeader>
+          <CardHeader className="px-4 md:px-6">
             <CardTitle>School Profile</CardTitle>
             <CardDescription>
               This information will appear on the students' report cards.
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-4 md:px-6">
             <SettingsForm school={school} />
           </CardContent>
         </Card>

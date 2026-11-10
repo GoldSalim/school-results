@@ -121,7 +121,7 @@ export default function BulkUploadForm({ classes, subjects, terms }: { classes: 
 
   return (
     <div className="space-y-6">
-      <div className="grid md:grid-cols-2 gap-4 max-w-2xl bg-white p-4 rounded-lg border shadow-sm">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl bg-white p-4 rounded-lg border shadow-sm">
         <div>
           <label className="block text-sm font-medium mb-1">Select Class</label>
           <select value={classId} onChange={e => setClassId(e.target.value)} className="w-full border rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#0A1F44] appearance-auto">
@@ -152,8 +152,9 @@ export default function BulkUploadForm({ classes, subjects, terms }: { classes: 
                 </div>
               </div>
 
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm text-left">
+              {/* SCROLLABLE TABLE FOR MOBILE */}
+              <div className="overflow-x-auto w-full">
+                <table className="w-full text-sm text-left whitespace-nowrap min-w-[600px]">
                   <thead className="bg-slate-50 text-slate-600 border-b">
                     <tr>
                       <th className="px-4 py-2 font-medium w-48">Subject</th>
@@ -203,8 +204,7 @@ export default function BulkUploadForm({ classes, subjects, terms }: { classes: 
                 </table>
               </div>
 
-              {/* Remarks Section */}
-              <div className="bg-slate-50 border-t p-4 grid grid-cols-2 gap-4">
+              <div className="bg-slate-50 border-t p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-1 text-slate-700">Class Teacher's Remark</label>
                   <select 
@@ -243,7 +243,7 @@ export default function BulkUploadForm({ classes, subjects, terms }: { classes: 
 
       {classId && students.length > 0 && (
         <div className="flex justify-end pt-4 sticky bottom-4">
-          <button onClick={onSubmit} disabled={loading} className="flex items-center gap-2 bg-[#0A1F44] text-white px-6 py-3 rounded-md font-medium hover:bg-opacity-90 disabled:opacity-50 transition shadow-lg">
+          <button onClick={onSubmit} disabled={loading} className="flex items-center gap-2 bg-[#0A1F44] text-white px-6 py-3 rounded-md font-medium hover:bg-opacity-90 disabled:opacity-50 transition shadow-lg w-full md:w-auto justify-center">
             {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Save className="h-5 w-5" />}
             {loading ? 'Saving All Results...' : 'Save All Scores as Draft'}
           </button>
